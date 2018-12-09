@@ -1,4 +1,4 @@
-# PRESTASHOP : module eewee_slack
+# PRESTASHOP 1.7 : module eewee_slack
 
 1. Add a slack message for new order.
 2. Add a slack message for new customer.
