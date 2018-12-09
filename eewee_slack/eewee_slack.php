@@ -309,10 +309,14 @@ class Eewee_Slack extends Module implements WidgetInterface
             $customer           = $params['customer']->firstname . ' ' . $params['customer']->lastname;
             $order_reference    = $params['order']->reference;
             $message            = $customer . ', Ref : ' . $order_reference;
+	        $channel = Tools::getValue('EEWEE_SLACK_CHANNEL_DEFAULT', Configuration::get('EEWEE_SLACK_CHANNEL_DEFAULT'));
+	        if (!isset($channel) || empty($channel)) {
+		        $channel = "prestashop";
+	        }
 
             // SLACK SEND
             $m_slack = new EeweeslackSlackModel();
-            $m_slack->send($message, "Order", "prestashop");
+            $m_slack->send($message, "Order", $channel);
         }
     }
 
@@ -329,10 +333,14 @@ class Eewee_Slack extends Module implements WidgetInterface
                 $customer .= ' ('.$params['newCustomer']->company.')';
             }
             $message = $customer;
+            $channel = Tools::getValue('EEWEE_SLACK_CHANNEL_DEFAULT', Configuration::get('EEWEE_SLACK_CHANNEL_DEFAULT'));
+            if (!isset($channel) || empty($channel)) {
+	            $channel = "prestashop";
+            }
 
             // SLACK SEND
             $m_slack = new EeweeslackSlackModel();
-            $m_slack->send($message, "Customer", "prestashop");
+            $m_slack->send($message, "Customer", $channel);
         }
     }
 
